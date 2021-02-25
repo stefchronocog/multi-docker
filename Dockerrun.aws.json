@@ -6,18 +6,21 @@
       "image": "stefcognizant/multi-client",
       "hostname": "client",
       "essential": false,
+      "memory": 128
     },
     {
       "name": "server",
       "image": "stefcognizant/multi-server",
       "hostname": "api",
       "essential": false,
+      "memory": 128
     },
     {
       "name": "worker",
       "image": "stefcognizant/multi-worker",
       "hostname": "worker",
       "essential": false,
+      "memory": 128
     },
     {
       "name": "nginx",
@@ -31,6 +34,7 @@
         }
       ],
       "links": ["client", "server"],
+      "memory": 128
     }
   ]
 }
