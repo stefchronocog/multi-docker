@@ -17,6 +17,6 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to Docker Hub
   - docker push stefcognizant/multi-client
-  -  docker push stefcognizant/multi-nginx
-  -  docker push stefcognizant/multi-server
-  -  docker push stefcognizant/multi-worker
+  - docker push stefcognizant/multi-nginx
+  - docker push stefcognizant/multi-server
+  - docker push stefcognizant/multi-worker
