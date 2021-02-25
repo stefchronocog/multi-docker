@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t stefcognizant/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true stefcognizant/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t stefcognizant/multi-client ./client
+  - docker build -t stefcognizant/multi-nginx ./nginx
+  - docker build -t stefcognizant/multi-server ./server
+  - docker build -t stefcognizant/multi-worker ./worker
+  # Log in to Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to Docker Hub
+  - docker push stefcognizant/multi-client
+  -  docker push stefcognizant/multi-nginx
+  -  docker push stefcognizant/multi-server
+  -  docker push stefcognizant/multi-worker
